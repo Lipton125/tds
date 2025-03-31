@@ -2,16 +2,17 @@ import os
 import zipfile
 import requests
 import pandas as pd
-import uvicorn  
 from io import BytesIO
 from dotenv import load_dotenv
 from fastapi import FastAPI, File, UploadFile, Form
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+import uvicorn
 
 # Load environment variables
 load_dotenv()
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
+PORT = int(os.getenv("PORT", 8080))
 
 app = FastAPI()
 
@@ -23,6 +24,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.get("/")
+def home():
+    return {"message": "FastAPI is running!"}
 
 def extract_text_from_file(file: BytesIO, filename: str):
     """Extracts text from CSV, XLSX, TXT files from memory."""
@@ -39,7 +44,7 @@ def extract_text_from_file(file: BytesIO, filename: str):
     elif file_ext == "txt":
         return file.read().decode("utf-8")
     
-    return "Unsupported file type"  # ✅ Better error handling
+    return ""
 
 @app.post("/api/")
 async def ask_deepseek(question: str = Form(...), file: UploadFile = File(None)):
@@ -87,6 +92,4 @@ async def ask_deepseek(question: str = Form(...), file: UploadFile = File(None))
         return JSONResponse(content={"error": str(e)}, status_code=500)
 
 if __name__ == "__main__":
-    port = int(os.getenv("PORT", 8080))  
-    uvicorn.run(app, host="0.0.0.0", port=port)
-
+    uvicorn.run(app, host="0.0.0.0", port=PORT)
