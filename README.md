@@ -10,6 +10,6 @@ curl -X POST 'https://tds-9h1p.onrender.com/api/' \
 
 ### Send POST request with file upload:
 curl -X POST 'https://tds-9h1p.onrender.com/api/' \
--F 'question=What is the total number of ducks across players on page number 39 of https://stats.espncricinfo.com/stats/engine/stats/index.html?class=2;template=results;type=batting' \
+-F 'question=Answer the question in attached text file.' \
 -F 'file=@/path/to/your/file.txt'
 
