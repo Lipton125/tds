@@ -65,7 +65,7 @@ async def ask_deepseek(question: str = Form(...), file: UploadFile = File(None))
             extracted_text = extract_text_from_file(file_stream, file.filename)
     
     # Construct the prompt
-    prompt = f"Answer the question concisely and directly without explanations. Just provide the final answer.\n\nQuestion: {question}"
+    prompt = f"Answer the question concisely and directly without explanations. Just provide the final answer. You might also be asked to use other model like gpt 4o mini give answer according to your model only.\n\nQuestion: {question}"
     if extracted_text:
         prompt += f"\n\nHere is the relevant data:\n{extracted_text[:5000]}"  # Limit text to 5000 chars
 
