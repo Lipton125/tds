@@ -1,9 +1,8 @@
 import os
-import shutil
-import uuid
 import zipfile
 import requests
 import pandas as pd
+import uvicorn  
 from io import BytesIO
 from dotenv import load_dotenv
 from fastapi import FastAPI, File, UploadFile, Form
@@ -40,7 +39,7 @@ def extract_text_from_file(file: BytesIO, filename: str):
     elif file_ext == "txt":
         return file.read().decode("utf-8")
     
-    return ""
+    return "Unsupported file type"  # ✅ Better error handling
 
 @app.post("/api/")
 async def ask_deepseek(question: str = Form(...), file: UploadFile = File(None)):
@@ -86,3 +85,7 @@ async def ask_deepseek(question: str = Form(...), file: UploadFile = File(None))
 
     except Exception as e:
         return JSONResponse(content={"error": str(e)}, status_code=500)
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=int(os.getenv("PORT", 8000)))
+
