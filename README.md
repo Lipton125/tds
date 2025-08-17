@@ -1,15 +1,12 @@
-# Supply Chain Correlation Analysis
+# Customer Analytics: Customer Satisfaction by Product Category
 
-This repository contains a correlation analysis of supplier performance metrics for an automotive manufacturer.
-The analysis was conducted using Excel’s Data Analysis ToolPak and visualized using conditional formatting.
+This repository contains a Seaborn-based visualization of average customer satisfaction by product category for Emard and Sons’ retail client. The visualization is intended for executive presentations and board reports.
 
 ## Files
-
-* `correlation.csv` → Correlation matrix exported from Excel
-* `heatmap.png` → Heatmap visualization with Red-White-Green color scale
-* `README.md` → Documentation and analyst contact
+- `chart.py` → Python script to generate the Seaborn visualization
+- `chart.png` → Barplot image (512x512 pixels)
+- `README.md` → Documentation and analyst contact
 
 ## Contact
-
-Email: [24f2007002@ds.study.iitm.ac.in](mailto:24f2007002@ds.study.iitm.ac.in)
+Email: 24f2007002@ds.study.iitm.ac.in
 
