@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quarterly Earnings – Interactive RevealJS Deck</title>
+
+  <!-- RevealJS core & theme -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/theme/league.css" id="theme">
+
+  <!-- Syntax highlight theme (Monokai) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4/plugin/highlight/monokai.css">
+
+  <style>
+    /* A touch of polish */
+    .reveal .footer {
+      position: absolute; left: 1.2rem; right: 1.2rem; bottom: 0.6rem;
+      font-size: 16px; opacity: 0.75; display: flex; justify-content: space-between;
+    }
+    .kpi { display: grid; grid-template-columns: repeat(3, minmax(160px, 1fr)); gap: 16px; }
+    .kpi .card { border-radius: 16px; padding: 18px 20px; box-shadow: 0 8px 24px rgba(0,0,0,.15); }
+    .kpi .num { font-size: 48px; font-weight: 800; line-height: 1; margin-bottom: 8px; }
+    .kpi .lbl { font-size: 18px; opacity: .85; }
+    .brand { font-weight: 700; letter-spacing: .02em; }
+    .email { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- Title -->
+      <section>
+        <h2>Quarterly Earnings Report</h2>
+        <p class="brand">Major Financial Institution · Q<span id="qnum">?</span> FY<span id="fynum">2025</span></p>
+        <p class="email">Contact: <a href="mailto:24f2007002@ds.study.iitm.ac.in">24f2007002@ds.study.iitm.ac.in</a></p>
+        <p style="font-size: 20px; opacity:.8">Use ← → or Space to navigate • Press <kbd>s</kbd> for speaker notes</p>
+        <aside class="notes">
+          Welcome stakeholders. This deck is interactive: fragments reveal step‑by‑step, code blocks are live highlighted, and equations render via KaTeX. Keep a steady pace and pause on KPI slides for discussion.
+        </aside>
+      </section>
+
+      <!-- Markdown slide (requirement: at least one slide written in Markdown) -->
+      <section data-markdown>
+        <textarea data-template>
+### Agenda (Markdown)
+
+1. **Highlights** – revenue, margin, and EPS
+2. **Drivers** – segment performance & costs
+3. **Outlook** – guidance and risks
+4. **Appendix** – methodology, formulas, and code
+
+> *Note:* This slide is authored in **Markdown** using the RevealJS Markdown plugin.
+        </textarea>
+      </section>
+
+      <!-- KPIs with fragments -->
+      <section>
+        <h3>Quarterly Highlights</h3>
+        <div class="kpi">
+          <div class="card fragment">
+            <div class="num">₹ 4,580 Cr</div>
+            <div class="lbl">Total Revenue (+7% YoY)</div>
+          </div>
+          <div class="card fragment">
+            <div class="num">19.8%</div>
+            <div class="lbl">Operating Margin (+120 bps)</div>
+          </div>
+          <div class="card fragment">
+            <div class="num">₹ 18.42</div>
+            <div class="lbl">EPS (Basic)</div>
+          </div>
+        </div>
+        <aside class="notes">
+          Use fragments to pace discussion: revenue first, then margin improvements from cost discipline, then EPS.
+        </aside>
+      </section>
+
+      <!-- Code sample with syntax highlighting -->
+      <section>
+        <h3>Methodology Snippet: CAGR (Python)</h3>
+        <pre><code class="language-python" data-trim data-line-numbers>
+import math
+
+def cagr(start_value: float, end_value: float, periods: int) -&gt; float:
+    """Compound Annual Growth Rate."""
+    return (end_value / start_value) ** (1 / periods) - 1
+
+print(f"CAGR: {cagr(3250, 4580, 3):.2%}")
+        </code></pre>
+        <aside class="notes">Explain that analysts can reproduce figures. Syntax highlighting is powered by the Highlight plugin.</aside>
+      </section>
+
+      <!-- Another code sample (SQL) -->
+      <section>
+        <h3>Revenue Bridge (SQL)</h3>
+        <pre><code class="language-sql" data-trim data-line-numbers>
+SELECT segment,
+       SUM(revenue) AS qtr_revenue,
+       SUM(revenue) - LAG(SUM(revenue)) OVER (PARTITION BY segment ORDER BY quarter) AS qoq_change
+FROM finance.revenue
+WHERE quarter = '2025-Q1'
+GROUP BY segment;
+        </code></pre>
+        <aside class="notes">If asked about attribution: show how the bridge is derived directly from the warehouse.</aside>
+      </section>
+
+      <!-- Math (financial formulas) -->
+      <section>
+        <h3>Key Formulas (Math)</h3>
+        <p>Net Present Value (NPV):</p>
+        <p>\[ \text{NPV} = \sum_{t=1}^{T} \frac{CF_t}{(1+r)^t} - C_0 \]</p>
+        <p>Capital Asset Pricing Model (CAPM):</p>
+        <p>\[ \mathbb{E}[R_i] = r_f + \beta_i\big(\mathbb{E}[R_m] - r_f\big) \]</p>
+        <p>Compound Growth:</p>
+        <p>\[ \text{CAGR} = \left(\frac{V_{\text{end}}}{V_{\text{start}}}\right)^{\tfrac{1}{n}} - 1 \]</p>
+        <aside class="notes">Keep r as the weighted average cost of capital for comparability when discussing NPV scenarios.</aside>
+      </section>
+
+      <!-- Closing with fragments and contact -->
+      <section>
+        <h3>Discussion & Next Steps</h3>
+        <ul>
+          <li class="fragment">Refine guidance based on July run-rate</li>
+          <li class="fragment">Deeper dive on fee income volatility</li>
+          <li class="fragment">Stress test credit costs (+50 bps)</li>
+        </ul>
+        <p class="fragment">Contact: <a href="mailto:24f2007002@ds.study.iitm.ac.in">24f2007002@ds.study.iitm.ac.in</a></p>
+        <aside class="notes">Invite Q&A. Offer to share appendix spreadsheets after the meeting.</aside>
+      </section>
+
+    </div>
+
+    <!-- Footer (appears on all slides) -->
+    <div class="footer">
+      <span>Quarterly Earnings · Interactive Deck</span>
+      <span><a href="mailto:24f2007002@ds.study.iitm.ac.in">24f2007002@ds.study.iitm.ac.in</a></span>
+    </div>
+  </div>
+
+  <!-- RevealJS scripts & plugins -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4/plugin/markdown/markdown.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4/plugin/highlight/highlight.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4/plugin/notes/notes.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4/plugin/math/math.js"></script>
+
+  <script>
+    // Auto-detect quarter number from current month (for the title slide)
+    (function () {
+      const d = new Date();
+      const month = d.getUTCMonth(); // 0-11
+      const q = Math.floor(month / 3) + 1; // 1-4
+      document.getElementById('qnum').textContent = q;
+    })();
+
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      transition: 'slide',
+      plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX ],
+      // Math plugin config (KaTeX)
+      math: {
+        mathjax: null, // not using MathJax
+        katexScript: 'https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js',
+        katexStyles: 'https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css',
+        // Delimiters already default to $...$ and \[...\]
+      }
+    });
+  </script>
+</body>
+</html>
+
